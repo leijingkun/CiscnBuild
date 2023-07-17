@@ -12,6 +12,7 @@ type JSONWriter struct {
 	mutex *sync.Mutex
 }
 
+// 负责写入文件,是追加格式,
 func (jw *JSONWriter) Push(m map[string]interface{}) {
 	jw.mutex.Lock()
 	defer jw.mutex.Unlock()
@@ -38,7 +39,7 @@ func (jw *JSONWriter) Push(m map[string]interface{}) {
 	}
 }
 
-// 打开一个json文件,如果存在也不会删除
+// 打开一个json文件,如果存在也不会删除,因为需要多次写入同一个文件
 func loadOutputJSON(path string) *JSONWriter {
 	if path == "" {
 		return nil

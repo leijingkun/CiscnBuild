@@ -21,6 +21,7 @@ func HostAlive() {
 			ipInfo := make(map[string]interface{})
 
 			_, err := net.Dial("tcp", host+":80")
+			//不存活
 			if err != nil {
 				fmt.Printf("%s 不可达\n", host)
 				ipInfo = PortScan(host)
@@ -28,6 +29,7 @@ func HostAlive() {
 				jw.Push(ipInfo)
 				return
 			}
+			//存活
 			fmt.Printf("%s 存活\n", host)
 			ipInfo = PortScan(host)
 			jw := loadOutputJSON("result.json")

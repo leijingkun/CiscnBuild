@@ -9,10 +9,10 @@ import (
 
 func PortScan(ip string) map[string]interface{} {
 	var ipInfo = make(map[string]interface{})
-	//执行一次,先把设备和蜜罐检测一下
+	//执行只一次,先把设备和蜜罐检测一下
 	ipInfo["ip"] = ip
 	ipInfo["deviceinfo"] = DeviceDetect(ip)
-	ipInfo["honeypot"] = HoneyPot(ip)
+	ipInfo["honeypot"] = HoneyPot(ip, 22)
 	// 定义等待组，用于等待所有协程执行完成
 	wg := &sync.WaitGroup{}
 

@@ -5,11 +5,13 @@ import (
 	"net"
 )
 
-func ServiceDetect(ip string, port int) string {
+// 返回字段"service_app": ["Apache/2.2.15", "Joomla/N"] 需要返回服务与版本
+// 版本号精确度大于等于答案为真，小于答案为假
+func ServiceDetect(ip string, port int) []string {
 	conn, err := net.Dial("tcp", fmt.Sprintf(ip, port))
 	if err != nil {
 		fmt.Printf("端口 %d 不可达\n", port)
-		return "null"
+		return []string{"aaa", "bbb"}
 	}
 	defer conn.Close()
 
@@ -19,17 +21,8 @@ func ServiceDetect(ip string, port int) string {
 	n, err := conn.Read(buf)
 	if err != nil {
 		fmt.Printf("端口 %d 读取数据失败\n", port)
-		return "null"
+		return []string{"aaa", "bbb"}
 	}
-
-	// 根据响应数据的不同，识别出端口的指纹，并输出指纹识别结果
-	if string(buf[:n]) == "HTTP/1.0 200 OK\r\n\r\n" {
-		return "apache"
-	} else if string(buf[:n]) == "SSH-2.0-OpenSSH_8.2p1 Ubuntu-4ubuntu0.3\r\n" {
-		return "ssh"
-	} else if string(buf[:n]) == "SMTP\r\n" {
-		return "smtp"
-	} else {
-		return "unknown"
-	}
+	fmt.Println(n)
+	return []string{"aaa", "bbb"}
 }
