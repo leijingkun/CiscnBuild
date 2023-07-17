@@ -11,7 +11,7 @@ func ServiceDetect(ip string, port int) []string {
 	conn, err := net.Dial("tcp", fmt.Sprintf(ip, port))
 	if err != nil {
 		fmt.Printf("端口 %d 不可达\n", port)
-		return []string{"aaa", "bbb"}
+		return []string{}
 	}
 	defer conn.Close()
 

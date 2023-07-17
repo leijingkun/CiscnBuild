@@ -1,95 +1,65 @@
 []	{
 		"211.22.90.152": {
-			"deviceinfo": "cisco",
+			"deviceinfo": "app",
 			"honeypot": null,
 			"services": [
 				{
-					"port": 25,
-					"protocol": "null",
-					"service_app": [
-						"aaa",
-						"bbb"
-					]
-				},
-				{
 					"port": 110,
 					"protocol": "null",
-					"service_app": [
-						"aaa",
-						"bbb"
-					]
+					"service_app": []
+				},
+				{
+					"port": 25,
+					"protocol": "null",
+					"service_app": []
 				},
 				{
 					"port": 8000,
 					"protocol": "null",
-					"service_app": [
-						"aaa",
-						"bbb"
-					]
-				},
-				{
-					"port": 80,
-					"protocol": "null",
-					"service_app": [
-						"aaa",
-						"bbb"
-					]
-				},
-				{
-					"port": 9010,
-					"protocol": "null",
-					"service_app": [
-						"aaa",
-						"bbb"
-					]
+					"service_app": []
 				},
 				{
 					"port": 9020,
 					"protocol": "null",
-					"service_app": [
-						"aaa",
-						"bbb"
-					]
+					"service_app": []
+				},
+				{
+					"port": 80,
+					"protocol": "null",
+					"service_app": []
+				},
+				{
+					"port": 9010,
+					"protocol": "null",
+					"service_app": []
 				}
 			]
 		}
 	},
 	{
 		"113.30.191.68": {
-			"deviceinfo": "Hikvision",
+			"deviceinfo": "app",
 			"honeypot": null,
 			"services": [
 				{
 					"port": 25,
 					"protocol": "null",
-					"service_app": [
-						"aaa",
-						"bbb"
-					]
+					"service_app": []
 				},
 				{
 					"port": 110,
 					"protocol": "null",
-					"service_app": [
-						"aaa",
-						"bbb"
-					]
-				},
-				{
-					"port": 15672,
-					"protocol": "null",
-					"service_app": [
-						"aaa",
-						"bbb"
-					]
+					"service_app": []
 				},
 				{
 					"port": 2222,
 					"protocol": "null",
-					"service_app": [
-						"aaa",
-						"bbb"
-					]
+					"service_app": []
+				},
+				{
+					"port": 15672,
+					"protocol": "null",
+					"service_app": []
 				}
 			]
 		}
