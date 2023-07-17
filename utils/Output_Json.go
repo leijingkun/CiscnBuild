@@ -37,15 +37,19 @@ func (jw *JSONWriter) Push(m map[string]interface{}) {
 		jw.f.Write(jsonBuf)
 	}
 }
+
+// 打开一个json文件,如果存在也不会删除
 func loadOutputJSON(path string) *JSONWriter {
 	if path == "" {
 		return nil
 	}
 	if _, err := os.Stat(path); err == nil || os.IsExist(err) {
 		fmt.Println("检测到JSON输出文件已存在，将自动删除该文件：", path)
-		if err := os.Remove(path); err != nil {
-			fmt.Println("删除文件失败，请检查：", err)
-		}
+		//删除文件,先注释掉
+
+		// if err := os.Remove(path); err != nil {
+		// 	fmt.Println("删除文件失败，请检查：", err)
+		// }
 	}
 	f, err := os.OpenFile(path, os.O_CREATE+os.O_RDWR, 0764)
 	if err != nil {
@@ -60,12 +64,11 @@ func loadOutputJSON(path string) *JSONWriter {
 	return &JSONWriter{f, &sync.Mutex{}}
 }
 
-var ipInfo = make(map[string]interface{})
-
-func Result(ip string, port int) {
+func Result(ip string, port int, ipInfo map[string]interface{}) {
 	if ipInfo["services"] == nil {
 		ipInfo["services"] = make([]map[string]interface{}, 0)
 	}
+	//设置一个services的三个字段
 	ipInfo["services"] = append(ipInfo["services"].([]map[string]interface{}), map[string]interface{}{
 		"port":        port,
 		"protocol":    ProtocolDetect(ip, port),

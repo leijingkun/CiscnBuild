@@ -1,8 +1,7 @@
-[
-	{
+{
 		"211.22.90.152": {
 			"deviceinfo": "Hikvision",
-			"honeypot": "HFish",
+			"honeypot": "Kippo",
 			"services": [
 				{
 					"port": 110,
@@ -15,12 +14,12 @@
 					"service_app": "null"
 				},
 				{
-					"port": 8000,
+					"port": 80,
 					"protocol": "null",
 					"service_app": "null"
 				},
 				{
-					"port": 80,
+					"port": 8000,
 					"protocol": "null",
 					"service_app": "null"
 				},
@@ -36,5 +35,32 @@
 				}
 			]
 		}
+	},
+	{
+		"113.30.191.68": {
+			"deviceinfo": "dahua",
+			"honeypot": "glastopf",
+			"services": [
+				{
+					"port": 25,
+					"protocol": "null",
+					"service_app": "null"
+				},
+				{
+					"port": 110,
+					"protocol": "null",
+					"service_app": "null"
+				},
+				{
+					"port": 15672,
+					"protocol": "null",
+					"service_app": "null"
+				},
+				{
+					"port": 2222,
+					"protocol": "null",
+					"service_app": "null"
+				}
+			]
+		}
 	}
-]

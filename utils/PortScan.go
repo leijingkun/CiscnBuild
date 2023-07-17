@@ -7,12 +7,12 @@ import (
 	"sync"
 )
 
-func PortScan(ip string) {
+func PortScan(ip string) map[string]interface{} {
+	var ipInfo = make(map[string]interface{})
+	//执行一次,先把设备和蜜罐检测一下
 	ipInfo["ip"] = ip
 	ipInfo["deviceinfo"] = DeviceDetect(ip)
 	ipInfo["honeypot"] = HoneyPot(ip)
-	// 定义需要扫描的IP地址和端口号
-
 	// 定义等待组，用于等待所有协程执行完成
 	wg := &sync.WaitGroup{}
 
@@ -30,11 +30,13 @@ func PortScan(ip string) {
 
 			conn.Close()
 			fmt.Printf("端口 %d 打开\n", port)
-			Result(ip, port)
+			//对于打开的端口执行下面这个函数,探测协议和服务
+			fmt.Println("当前ip:", ip)
+			Result(ip, port, ipInfo)
 		}(port)
 	}
 
 	wg.Wait()
-	jw := loadOutputJSON("result.json")
-	jw.Push(ipInfo)
+	//当前主机的所有任务完成
+	return ipInfo
 }

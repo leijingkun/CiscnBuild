@@ -15,15 +15,23 @@ func HostAlive() {
 	for _, host := range config.Hosts {
 		wg.Add(1)
 		go func(host string) {
+
 			defer wg.Done()
+
+			ipInfo := make(map[string]interface{})
 
 			_, err := net.Dial("tcp", host+":80")
 			if err != nil {
 				fmt.Printf("%s 不可达\n", host)
+				ipInfo = PortScan(host)
+				jw := loadOutputJSON("result.json")
+				jw.Push(ipInfo)
 				return
 			}
 			fmt.Printf("%s 存活\n", host)
-			PortScan(host)
+			ipInfo = PortScan(host)
+			jw := loadOutputJSON("result.json")
+			jw.Push(ipInfo)
 		}(host)
 	}
 
