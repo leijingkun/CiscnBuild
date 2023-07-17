@@ -17,9 +17,15 @@ func (jw *JSONWriter) Push(m map[string]interface{}) {
 	defer jw.mutex.Unlock()
 	stat, err := jw.f.Stat()
 	if err != nil {
-		fmt.Println("文件打开错误")
+		fmt.Println("打开文件失败")
 	}
-	jsonBuf, _ := json.MarshalIndent(m, "\t", "\t")
+	newmap := make(map[string]interface{})
+	newmap[m["ip"].(string)] = map[string]interface{}{
+		"services":   m["services"],
+		"deviceinfo": m["deviceinfo"],
+		"honeypot":   m["honeypot"],
+	}
+	jsonBuf, _ := json.MarshalIndent(newmap, "\t", "\t")
 	jsonBuf = append(jsonBuf, []byte("\n]\n")...)
 	if stat.Size() == 2 {
 		jw.f.Seek(stat.Size()-1, 0)
@@ -54,29 +60,16 @@ func loadOutputJSON(path string) *JSONWriter {
 	return &JSONWriter{f, &sync.Mutex{}}
 }
 
-func Result(ip string, ports []int) {
+var ipInfo = make(map[string]interface{})
 
-	// 定义等待组，用于等待所有协程执行完成
-	wg := &sync.WaitGroup{}
-	jw := loadOutputJSON("result.json")
-	// 使用协程并发识别指定端口的协议
-	for _, port := range ports {
-		wg.Add(1)
-		go func(port int) {
-			defer wg.Done()
-
-			// 尝试连接指定端口并发送协议识别请求
-			server := make(map[string]interface{})
-			server["port"] = port
-			server["protocol"] = ProtocolDetect(ip, port)
-			server["service_app"] = ServiceDetect(ip, port)
-
-			jw.Push(server)
-
-			// 发送协议识别请求，并读取响应数据
-
-		}(port)
+func Result(ip string, port int) {
+	if ipInfo["services"] == nil {
+		ipInfo["services"] = make([]map[string]interface{}, 0)
 	}
+	ipInfo["services"] = append(ipInfo["services"].([]map[string]interface{}), map[string]interface{}{
+		"port":        port,
+		"protocol":    ProtocolDetect(ip, port),
+		"service_app": ServiceDetect(ip, port),
+	})
 
-	wg.Wait()
 }
