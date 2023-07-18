@@ -1,7 +1,12 @@
 package main
 
-import "CiscnMap/utils"
+import (
+	"CiscnMap/utils"
+	"fmt"
+)
 
 func main() {
-	utils.HostAlive()
+	if utils.Isglastopf("36.152.44.95", 80) {
+		fmt.Println("is a honeypot")
+	}
 }

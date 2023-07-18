@@ -5,7 +5,12 @@ var (
 	Hosts = []string{"113.30.191.68", "211.22.90.152"}
 	//探测的范围
 	Server_list   = []string{"Windows", "centos", "ubuntu", "openssh", "openssl", "wordpress", "LiteSpeed", "Jetty", "java", "node.js", "express", "asp.net", "php", "Microsoft-HTTPAPI", "rabbitmp", "apache", "iis", "nginx", "micro_httpd", "openresty", "grafana", "Weblogic", "elasticsearch", "debian"}
-	Honeypot_list = []string{"glastopf", "Kippo", "HFish"}
+	Honeypot_list = map[string]string{
+		"webcam":   "Hikvision",
+		"firewall": "pfsense",
+		"switch":   "cisco",
+		"nas":      "synology",
+	}
 	Device_list   = []string{"pfsense", "Hikvision", "cisco", "dahua", "synology"}
 	Protocol_list = []string{"ssh", "http", "https", "rtsp", "ftp", "telnet", "amap", "mongodb", "redis", "mysql"}
 	//常用端口列表
