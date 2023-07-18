@@ -57,14 +57,8 @@ func Curl(url string, headers map[string]string) (string, error) {
 	for key, value := range headers {
 		req.Header.Set(key, value)
 	}
-	//重定向nm,https还得搞证书,水水过了
-	// client := &http.Client{
-	// 	CheckRedirect: func(req *http.Request, via []*http.Request) error {
-	// 		// 打印重定向信息
-	// 		fmt.Println("redirect:", req.URL)
-	// 		return nil
-	// 	},
-	// }
+
+	client := &http.Client{}
 
 	resp, err := client.Do(req)
 	if err != nil {
