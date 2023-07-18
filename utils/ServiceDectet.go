@@ -21,7 +21,7 @@ func ServiceDetect(ip string, port int) []string {
 	defer conn.Close()
 
 	// 发送指纹识别请求，并读取响应数据
-	//fmt.Fprintf(conn, "GET / HTTP/1.0\r\n\r\n")
+	fmt.Fprintf(conn, "GET / HTTP/1.0\r\n\r\n")
 	buf := make([]byte, 1024)
 	n, err := conn.Read(buf)
 	if err != nil {

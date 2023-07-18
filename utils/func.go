@@ -2,13 +2,11 @@ package utils
 
 import (
 	"fmt"
-	"io"
 	"io/ioutil"
 	"math/rand"
 	"net"
 	"net/http"
 	"strconv"
-	"time"
 )
 
 // 返回数组里随机一个元素
@@ -49,34 +47,6 @@ func nc_send(ip string, port int, data []byte, buf int) string {
 }
 
 // 接收数据
-func nc_rev(ip string, port int) string {
-	conn, err := net.Dial("tcp", ip+":"+strconv.Itoa(port))
-	if err != nil {
-		panic(err)
-	}
-	conn.Write([]byte(""))
-	defer conn.Close() // Close the connection when we're done
-
-	buf := make([]byte, 1024)
-	//等待结果,超时3s则停止
-	for {
-		conn.SetReadDeadline(time.Now().Add(5 * time.Second)) // Set a 5-second timeout
-		n, err := conn.Read(buf)
-		if err != nil {
-			if err, ok := err.(net.Error); ok && err.Timeout() {
-				break // Exit loop when we reach the timeout
-			}
-			if err != io.EOF {
-				panic(err)
-			}
-			break // Exit loop when we reach end of file
-		}
-		fmt.Println(string(buf[:n]))
-	}
-	return ""
-}
-
-// 模拟curl
 func Curl(url string, headers map[string]string) (string, error) {
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
@@ -88,7 +58,14 @@ func Curl(url string, headers map[string]string) (string, error) {
 		req.Header.Set(key, value)
 	}
 
-	client := &http.Client{}
+	client := &http.Client{
+		CheckRedirect: func(req *http.Request, via []*http.Request) error {
+			// 打印重定向信息
+			fmt.Println("redirect:", req.URL)
+			return nil
+		},
+	}
+
 	resp, err := client.Do(req)
 	if err != nil {
 		return "", err

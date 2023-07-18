@@ -2,7 +2,7 @@ package config
 
 var (
 	//主机范围
-	Hosts = []string{"113.30.191.68", "211.22.90.152"}
+	Hosts = []string{"190.140.232.105"}
 	//探测的范围
 	Server_list   = []string{"Windows", "centos", "ubuntu", "openssh", "openssl", "wordpress", "LiteSpeed", "Jetty", "java", "node.js", "express", "asp.net", "php", "Microsoft-HTTPAPI", "rabbitmp", "apache", "iis", "nginx", "micro_httpd", "openresty", "grafana", "Weblogic", "elasticsearch", "debian"}
 	Honeypot_list = map[string]string{
