@@ -31,7 +31,7 @@ func IsKippo(ip string) string {
 			defer wg.Done()
 			response := nc_send(ip, port, data, 1024)
 			// 输出服务器的响应
-			fmt.Println("response", response)
+			// fmt.Println("response", response)
 			//判断回复里有没有bad字符串
 			// if strings.Contains(response, "bad") {
 			// 	return true

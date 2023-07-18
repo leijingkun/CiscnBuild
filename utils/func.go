@@ -42,7 +42,7 @@ func nc_send(ip string, port int, data []byte, buf int) string {
 
 	// 打印返回数据
 	response := string(buffer)
-	fmt.Println("Received", response)
+	// fmt.Println("Received", response)
 	return response
 }
 

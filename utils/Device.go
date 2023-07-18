@@ -26,7 +26,8 @@ func IsHikvision(ip string) string {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("response", response)
+	//打印输出
+	// fmt.Println("response", response)
 	if strings.Contains(response, "Hikvision") {
 		return "hivkision"
 	}
@@ -39,7 +40,7 @@ func IsPfsense(ip string) string {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("response", response)
+	// fmt.Println("response", response)
 	if strings.Contains(response, "Pfsense") {
 		return "Pfsense"
 	}
@@ -69,7 +70,7 @@ func IsSynology(ip string) string {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("response", response)
+	// fmt.Println("response", response)
 	if strings.Contains(response, "Synology") {
 		return "Pfsense"
 	}
