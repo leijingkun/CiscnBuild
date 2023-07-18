@@ -13,7 +13,7 @@ import (
 //, "asp.net", "php", "Microsoft-HTTPAPI", "rabbitmp", "apache", "iis", "nginx", "micro_httpd", "openresty", "grafana", "Weblogic", "elasticsearch", "debian"
 
 func ServiceDetect(ip string, port int) []string {
-	conn, err := net.DialTimeout("tcp", ip+":"+fmt.Sprint(port), 5*time.Second)
+	conn, err := net.DialTimeout("tcp", ip+":"+fmt.Sprint(port), 2*time.Second)
 	if err != nil {
 		fmt.Printf("端口 %d 不可达\n", port)
 		return nil
