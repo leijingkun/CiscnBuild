@@ -24,7 +24,7 @@ func DeviceDetect(ip string) []string {
 func IsHikvision(ip string) string {
 	response, err := Curl("http://"+ip+":80", map[string]string{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"})
 	if err != nil {
-		panic(err)
+		return ""
 	}
 	//打印输出
 	// fmt.Println("response", response)
@@ -38,7 +38,7 @@ func IsHikvision(ip string) string {
 func IsPfsense(ip string) string {
 	response, err := Curl("http://"+ip+":80", map[string]string{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"})
 	if err != nil {
-		panic(err)
+		return ""
 	}
 	// fmt.Println("response", response)
 	if strings.Contains(response, "Pfsense") {
@@ -68,7 +68,7 @@ func IsCisco(ip string) string {
 func IsSynology(ip string) string {
 	response, err := Curl("http://"+ip+":5001", map[string]string{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"})
 	if err != nil {
-		panic(err)
+		return ""
 	}
 	// fmt.Println("response", response)
 	if strings.Contains(response, "Synology") {

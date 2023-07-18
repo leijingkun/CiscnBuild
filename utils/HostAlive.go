@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net"
 	"sync"
+	"time"
 )
 
 func HostAlive() {
@@ -19,14 +20,12 @@ func HostAlive() {
 			defer wg.Done()
 
 			ipInfo := make(map[string]interface{})
-
-			_, err := net.Dial("tcp", host+":80")
-			//不存活
-			if err != nil {
+			//如果不存活,啥也别干了
+			if checkHostAlive(host) {
 				fmt.Printf("%s 不可达\n", host)
-				ipInfo = PortScan(host)
-				jw := loadOutputJSON("result.json")
-				jw.Push(ipInfo)
+				// ipInfo = PortScan(host)
+				// jw := loadOutputJSON("result.json")
+				// jw.Push(ipInfo)
 				return
 			}
 			//存活
@@ -39,4 +38,17 @@ func HostAlive() {
 
 	// 等待所有协程执行完成
 	wg.Wait()
+}
+func checkHostAlive(ip string) bool {
+	timeout := time.Second
+
+	conn, err := net.DialTimeout("ip4:icmp", ip, timeout)
+	if err != nil {
+		fmt.Printf("Error pinging host %s: %s\n", ip, err)
+		return true
+	}
+	defer conn.Close()
+
+	// fmt.Printf("Host %s is alive\n", ip)
+	return false
 }

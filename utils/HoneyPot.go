@@ -33,11 +33,10 @@ func IsKippo(ip string) string {
 			// 输出服务器的响应
 			// fmt.Println("response", response)
 			//判断回复里有没有bad字符串
-			// if strings.Contains(response, "bad") {
-			// 	return true
-			// }
-			// return false
-			return "kippo" + strconv.Itoa(port)
+			if strings.Contains(response, "bad") {
+				return "kippo" + strconv.Itoa(port)
+			}
+			return ""
 		}(port)
 	}
 	wg.Wait()

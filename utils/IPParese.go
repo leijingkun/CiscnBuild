@@ -33,9 +33,9 @@ func GetScope() {
 		fmt.Println("Error reading file: ", err)
 	}
 
-	for _, host := range config.Hosts {
-		fmt.Println(host)
-	}
+	// for _, host := range config.Hosts {
+	// 	fmt.Println(host)
+	// }
 }
 
 func inc(ip net.IP) {
