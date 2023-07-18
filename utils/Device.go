@@ -12,10 +12,10 @@ func DeviceDetect(ip string) []string {
 		result = append(result, IsHikvision(ip))
 	}
 	if IsCisco(ip) != "" {
-		result = append(result, IsHikvision(ip))
+		result = append(result, IsCisco(ip))
 	}
 	if IsPfsense(ip) != "" {
-		result = append(result, IsHikvision(ip))
+		result = append(result, IsPfsense(ip))
 	}
 	return result
 }
