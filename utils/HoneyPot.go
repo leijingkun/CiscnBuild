@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 	"sync"
@@ -54,9 +53,9 @@ func Isglastopf(ip string) string {
 			defer wg.Done()
 			response, err := Curl("http://"+ip+":"+strconv.Itoa(port), map[string]string{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"})
 			if err != nil {
-				panic(err)
+				return ""
 			}
-			fmt.Println("response", response)
+			// fmt.Println("response", response)
 			if strings.Contains(response, "Please post your comments for the blog") {
 				return "glastopf/" + strconv.Itoa(port)
 			}

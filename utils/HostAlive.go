@@ -29,7 +29,7 @@ func HostAlive() {
 				return
 			}
 			//存活
-			fmt.Printf("%s 存活\n", host)
+			fmt.Printf("%s存活\n", host)
 			ipInfo = PortScan(host)
 			jw := loadOutputJSON("result.json")
 			jw.Push(ipInfo)

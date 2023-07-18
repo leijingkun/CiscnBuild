@@ -58,7 +58,7 @@ func loadOutputJSON(path string) *JSONWriter {
 	}
 	jw := &JSONWriter{f, &sync.Mutex{}}
 	jw.f.Seek(0, 0)
-	_, err = jw.f.WriteString(`[]`)
+	_, err = jw.f.WriteString(``)
 	if err != nil {
 		fmt.Println("写入文件失败")
 	}
