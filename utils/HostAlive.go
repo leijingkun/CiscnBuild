@@ -11,7 +11,7 @@ import (
 func HostAlive() {
 	// 定义等待组，用于等待所有协程执行完成
 	wg := &sync.WaitGroup{}
-
+	jw := loadOutputJSON("result.json")
 	// 使用协程并发检测主机是否存活
 	for _, host := range config.Hosts {
 		wg.Add(1)
@@ -31,7 +31,6 @@ func HostAlive() {
 			//存活
 			fmt.Printf("%s存活\n", host)
 			ipInfo = PortScan(host)
-			jw := loadOutputJSON("result.json")
 			jw.Push(ipInfo)
 		}(host)
 	}
